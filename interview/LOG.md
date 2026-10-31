@@ -40,3 +40,4 @@
 - 12:46 · 박수복(부사수 진행) → 품목별 SKU 카탈로그 HTML (Yku9ZG2eH3PsliWC0108RA)
 - 12:49 · 이민준 → 영업일·공휴일 달력 xlsx (wvjSeGJRPI1_F47BlDcEDw). fetchdoc _xlsx_text 누락 버그 수정 → 부분환불 별표 재수집
 - 12:50 · 구방만(부사수) → C31 업무 인계 대장·박민아 수첩 (Q4owkAQyT-xhxfMKTJ2wUw) OCR. 박민아 연락처는 구방만도 없음
+- 13:03 · 고길동 → D42 축제 매대 전단(man1JtPrzVwhNvrBQ15ZsQ) / 김청년 → 과거 행사 목록 xlsx(L9jWZnudmLmB93svQTbnEw)
