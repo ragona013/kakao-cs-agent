@@ -25,7 +25,7 @@
 - 위탁 계약서(갯마을↔교동, PDF, 홍이장) — https://t1.kakaocdn.net/aitop100/aitop100/dist/VPaqTY6ACayEeUct0aT6aw.pdf
 - 중량 허용오차 조문(B13) → docs/중량_허용오차_조문_B13_홍이장_.md
 - 로트원장·출고검사 성적서(ZIP, 박수복) — https://t1.kakaocdn.net/aitop100/aitop100/dist/5qStcfJN45yTNkUI8SYD0w.zip (pdf는 팩스 이미지라 텍스트 0 → 필요시 OCR)
-| 박민아 | 냉동 상품 담당(박수복 언급) | (박수복에게 요청 중) | 연락처 확보 중 |
+| 박민아 | 갯마을 냉동 탑차 기사(조합 직원 아님) | https://pf.kakao.com/_xcflxaX | 13:10 홍이장에게 받음 — 채널 추가 요청 |
 - 정기배송 약관(이민준) — https://t1.kakaocdn.net/aitop100/aitop100/dist/m1SLEboPRfEAY8Y90ZFzMQ.html
 - 갯마을 수산 성어기·냉동 공급표(xlsx, 홍이장) — https://t1.kakaocdn.net/aitop100/aitop100/dist/DdTVsYgd8Z7paIu7CDy80g.xlsx
 - 산지에서 보내는 여름 상품(상세페이지 문안, 홍보라) — https://t1.kakaocdn.net/aitop100/aitop100/dist/4d_vVDlhO9Ir9fzafgolCQ.html
@@ -41,3 +41,7 @@
 - 12:49 · 이민준 → 영업일·공휴일 달력 xlsx (wvjSeGJRPI1_F47BlDcEDw). fetchdoc _xlsx_text 누락 버그 수정 → 부분환불 별표 재수집
 - 12:50 · 구방만(부사수) → C31 업무 인계 대장·박민아 수첩 (Q4owkAQyT-xhxfMKTJ2wUw) OCR. 박민아 연락처는 구방만도 없음
 - 13:03 · 고길동 → D42 축제 매대 전단(man1JtPrzVwhNvrBQ15ZsQ) / 김청년 → 과거 행사 목록 xlsx(L9jWZnudmLmB93svQTbnEw)
+- 13:06 · 홍보라 → 선물세트 카탈로그 D38 (yLox_fQfPWuju0hUD1WPEA) / 고길동 → 사업자 도매 거래 안내 (ycz6_sVFw3aF3-uE3HB5EA) / 홍이장 → 상품 라벨 D39 (MJUWHYnwsJsywd-tLNkhSA)
+- 13:14 · 박민아 → 콜드체인 온도 로그 zip (tHHClVffN4f8jvA_vuOtuQ) — 주문 100400001 해동 후 재냉동 확정
+- 13:22 · 홍이장 → 갯마을 조업·입고 기록 xlsx (MatemuULfW2nG1dnufufsA). 단서: 「시원배송 결항·집하 기록」(구방만?), 「달력·날씨 이력」
+- 13:24 · 구방만 → 시원배송 결항·집하 기록 (hlI1ZFiRXl4sgzAw6HF52Q) / 이민준 → 산지 캘린더·기상 운영 기준+사실 일지 (DI_nOipTMUa7snyu_7PWrw)
