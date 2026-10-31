@@ -130,6 +130,7 @@ async def bot_callback(callback_token: str, text: str, key: str):
         async with httpx.AsyncClient(timeout=10) as c:
             r = await c.post(f"{KAPI}/v1/bot/callback", json=body, headers=headers)
         log("bot_cb.jsonl", {"key": key, "status": r.status_code, "body": r.text[:300]})
+        print("CALLBACK", key, r.status_code, r.text[:200], flush=True)
     except Exception as e:
         log("bot_cb.jsonl", {"key": key, "error": str(e)})
 
@@ -138,6 +139,7 @@ async def bot_callback(callback_token: str, text: str, key: str):
 async def webhook(req: Request):
     payload = await req.json()
     log("bot_raw.jsonl", {"headers": dict(req.headers), "payload": payload})
+    print("WEBHOOK", json.dumps({"h": {k: v for k, v in req.headers.items() if k.lower().startswith(("x-", "user-agent"))}, "p": payload}, ensure_ascii=False)[:1500], flush=True)
     secret = os.getenv("WEBHOOK_SECRET_HEADER")  # "헤더이름:값" 형식, 설정했을 때만 검증
     if secret and ":" in secret:
         hn, hv = secret.split(":", 1)
@@ -164,6 +166,8 @@ async def webhook(req: Request):
                 res = await agent.handle(s, text)
             log("bot.jsonl", {"key": key, "tc": s.tc_id, "in": text, "out": res["reply"],
                               "ms": res["ms"], "trace": res["trace"]})
+            print("TURN", json.dumps({"key": key, "tc": s.tc_id, "ms": res["ms"], "in": text[:200], "out": res["reply"][:300],
+                                      "api": [f"{x.get('api')}:{x.get('status')}" for x in res["trace"]]}, ensure_ascii=False), flush=True)
             await bot_callback(d["callbackToken"], res["reply"], key)
 
         asyncio.create_task(work())
@@ -314,10 +318,7 @@ async def dev_fetchdoc(url: str):
                     xml = _zf.ZipFile(_io.BytesIO(data)).read("word/document.xml").decode("utf-8", "ignore")
                     text = re.sub(r"<[^>]+>", "", re.sub(r"</w:p>", "\n", xml))
                 elif low.endswith(".xlsx"):
-                    import zipfile as _zf, io as _io
-                    zz = _zf.ZipFile(_io.BytesIO(data))
-                    ss = zz.read("xl/sharedStrings.xml").decode("utf-8", "ignore") if "xl/sharedStrings.xml" in zz.namelist() else ""
-                    text = "\n".join(re.findall(r"<t[^>]*>([^<]*)</t>", ss))
+                    text = _xlsx_text(data)
                 elif low.endswith((".png", ".jpg", ".jpeg")):
                     (ROOT / "docs" / "raw").mkdir(exist_ok=True)
                     (ROOT / "docs" / "raw" / nm.rsplit("/", 1)[-1]).write_bytes(data)

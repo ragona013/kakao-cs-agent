@@ -32,3 +32,5 @@
 - 조합 규정집(PDF 7쪽, 이민준) — https://t1.kakaocdn.net/aitop100/aitop100/dist/pysSXW5mY9eWWv6tMsrihA.pdf (산지 픽업 조문 포함)
 - 조합원 가입 리플렛·멤버십 안내(ZIP D37, 홍보라) — https://t1.kakaocdn.net/aitop100/aitop100/dist/AQ_znwGwujW6X3lemUNJxw.zip
 - 규정·대응방안 개정 이력(ZIP B09 docx+구판 사진, 고길동) — https://t1.kakaocdn.net/aitop100/aitop100/dist/7pwiM8P_JmEfMSbzvIuwuQ.zip
+- 피싱·사칭 주의 안내(홍보라) — https://t1.kakaocdn.net/aitop100/aitop100/dist/5vvq6PshLE66YjnCVzkZzg.html
+- 농산 시즌 캘린더(ZIP: xlsx 거의 빈 파일 + 모니터 촬영 C23 5장 → OCR, 박수복) — https://t1.kakaocdn.net/aitop100/aitop100/dist/_uHi0aiIW__PSHbihlOOmQ.zip
