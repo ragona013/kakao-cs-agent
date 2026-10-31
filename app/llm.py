@@ -83,7 +83,44 @@ def _tools(tools):
 
 
 async def chat(messages, tools=None, target=None):
-    """returns OpenAI 형식 assistant message dict (content, tool_calls). target은 무시(호환용)."""
+    """Anthropic 우선, 실패(한도 초과·장애) 시 OpenAI로 자동 전환."""
+    if os.getenv("LLM_PRIMARY", "anthropic") == "openai":
+        return await _chat_openai(messages, tools)
+    try:
+        return await _chat_anthropic(messages, tools)
+    except Exception as e:
+        if not os.getenv("OPENAI_API_KEY"):
+            raise
+        try:
+            return await _chat_openai(messages, tools)
+        except Exception as e2:
+            raise RuntimeError(f"{e} | fallback: {e2}")
+
+
+async def _chat_openai(messages, tools=None):
+    msgs = []
+    for m in messages:
+        m = {k: v for k, v in m.items() if k in ("role", "content", "tool_calls", "tool_call_id")}
+        if m.get("tool_calls"):
+            m["tool_calls"] = [{k: tc[k] for k in ("id", "type", "function") if k in tc} for tc in m["tool_calls"]]
+        msgs.append(m)
+    payload = {"model": os.getenv("OPENAI_FALLBACK_MODEL", "gpt-4.1"), "messages": msgs}
+    if tools:
+        payload["tools"] = tools
+    r = await client().post(f"{OPENAI_URL}/chat/completions",
+                            headers={"Authorization": f"Bearer {os.getenv('OPENAI_API_KEY', '')}"},
+                            json=payload, timeout=float(os.getenv("LLM_TIMEOUT", "30")))
+    if r.status_code >= 400:
+        raise RuntimeError(f"OpenAI {r.status_code}: {r.text[:300]}")
+    m = r.json()["choices"][0]["message"]
+    out = {"role": "assistant", "content": m.get("content")}
+    if m.get("tool_calls"):
+        out["tool_calls"] = m["tool_calls"]
+    return out
+
+
+async def _chat_anthropic(messages, tools=None, target=None):
+    """returns OpenAI 형식 assistant message dict (content, tool_calls)."""
     if os.getenv("MOCK_LLM") == "1":
         last = next((m for m in reversed(messages) if m["role"] == "user"), {})
         c = last.get("content")

@@ -18,7 +18,7 @@
 ### 2. 지식·정책
 - [x] 공개 TC 14개 규칙을 config/knowledge.md에 일반화
 - [x] Y-16.md 추가됨
-- [~] 관계자 인터뷰 진행 중 — 7/10명(박수복 추가 대기) 확보, 문서 10건 docs/ 저장, 지식 config/knowledge.md 누적 (상세: interview/LOG.md, interview/PLAYBOOK.md)
+- [~] 관계자 인터뷰 진행 중 — 7/10명(이민준·구방만·홍보라·김청년·고길동·홍이장·박수복), 박민아 연락처 추적 중, 문서 22건 확보, 문서 10건 docs/ 저장, 지식 config/knowledge.md 누적 (상세: interview/LOG.md, interview/PLAYBOOK.md)
 - [x] 회신 기한 확보(영업일 3일, 날짜로 안내)
 - [x] 판매자 사업자정보 공시값 확보(docs/사업자정보.md)
 
@@ -44,8 +44,9 @@
 
 ### 4. 카카오톡 봇 연동·배포
 - [x] `/webhook` 구현 (204 즉시 응답 → kapi 콜백)
-- [ ] 카카오디벨로퍼스 앱·봇 생성, BOT_TOKEN 발급
-- [ ] 서버(139.59.118.225) 배포 + HTTPS 웹훅 URL 등록
+- [x] 카카오디벨로퍼스 앱·봇 생성, BOT_TOKEN 발급(사용자)
+- [x] Railway 배포(https://cs-agent-production-e354.up.railway.app, 12:10 첫 배포 성공)
+- [ ] Railway 비밀값 4개 입력(사용자) → 재푸시 → 웹훅 URL 등록
 - [ ] 채널 설정: 검색 허용 끄기(채널 공개는 켬), 채팅 기능 끄기
 - [ ] 실제 카톡으로 왕복 확인 + logs/bot_raw.jsonl에서 TC ID·첨부 필드 위치 확인
 - [ ] 제출: App ID + 디브리프
@@ -58,6 +59,8 @@
 - 미검증: claude-sonnet-5-5 실호출(키 교체 후)
 
 ## 작업 로그
+- 12:15 · Claude 앱 · Anthropic API 한도 초과 발생 → 사용자 콘솔 한도 상향. 안전장치로 Anthropic 실패 시 OpenAI(gpt-4.1) 자동 전환 추가. 문서는 프롬프트에 목록만 넣고 read_doc 도구로 읽게 바꿔 속도 개선(턴당 2~10초). TC 9개 검증(TEST_LOG.md)
+- 12:06 · Claude 앱 · 배포 Railway 결정(상주 서버·HTTPS·MCP 배포). GitHub 저장소는 사용자 생성/푸시
 - 11:55 · Claude 앱 · 카톡 PC앱 자동 인터뷰 22분: 관계자 6명·문서 10건 확보. docs/ 자동 수집(fetchdoc/ocr 엔드포인트), interview/PLAYBOOK.md에 상황별 대처·소요 시간 기록
 - 11:35 · Claude 앱 · 실제 키로 L-03 통과(API-11→API-24 접수, 턴당 2~6초). temperature 제거(Sonnet 5.5 미지원), load_dotenv override
 - 11:30 · Claude 앱 · 사용자 요청으로 LLM을 Anthropic Sonnet 단일화: llm.py를 Messages API 직접 호출로 교체(OpenAI형 기록↔Anthropic 변환, 이미지 url, 프롬프트 캐싱), Jev 라우터 기본 off, .env.example 정리. 모의 테스트로 툴 2회 왕복·이미지 변환 확인

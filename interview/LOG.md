@@ -28,3 +28,7 @@
 | 박민아 | 냉동 상품 담당(박수복 언급) | (박수복에게 요청 중) | 연락처 확보 중 |
 - 정기배송 약관(이민준) — https://t1.kakaocdn.net/aitop100/aitop100/dist/m1SLEboPRfEAY8Y90ZFzMQ.html
 - 갯마을 수산 성어기·냉동 공급표(xlsx, 홍이장) — https://t1.kakaocdn.net/aitop100/aitop100/dist/DdTVsYgd8Z7paIu7CDy80g.xlsx
+- 산지에서 보내는 여름 상품(상세페이지 문안, 홍보라) — https://t1.kakaocdn.net/aitop100/aitop100/dist/4d_vVDlhO9Ir9fzafgolCQ.html
+- 조합 규정집(PDF 7쪽, 이민준) — https://t1.kakaocdn.net/aitop100/aitop100/dist/pysSXW5mY9eWWv6tMsrihA.pdf (산지 픽업 조문 포함)
+- 조합원 가입 리플렛·멤버십 안내(ZIP D37, 홍보라) — https://t1.kakaocdn.net/aitop100/aitop100/dist/AQ_znwGwujW6X3lemUNJxw.zip
+- 규정·대응방안 개정 이력(ZIP B09 docx+구판 사진, 고길동) — https://t1.kakaocdn.net/aitop100/aitop100/dist/7pwiM8P_JmEfMSbzvIuwuQ.zip
