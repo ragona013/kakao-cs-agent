@@ -35,3 +35,8 @@
 - 피싱·사칭 주의 안내(홍보라) — https://t1.kakaocdn.net/aitop100/aitop100/dist/5vvq6PshLE66YjnCVzkZzg.html
 - 농산 시즌 캘린더(ZIP: xlsx 거의 빈 파일 + 모니터 촬영 C23 5장 → OCR, 박수복) — https://t1.kakaocdn.net/aitop100/aitop100/dist/_uHi0aiIW__PSHbihlOOmQ.zip
 - 12:33 · 고길동 → 부분환불 산식·박스 비율 임계표 zip 확보, knowledge.md 반영
+- 12:40 · 홍보라 → A07 홍보 게시물 상태기록·대조기준+게시물 이미지 5장 zip (TLV6tPKcBzRIuVib6Mj6cw)
+- 12:45 · 고길동 → 에스컬레이션 절차서 PDF (EU_lxPp3nt1-UPJexhhZvg), system_prompt 이관 규칙 보강. 단서: 「업무 인계·부재 기록(구방만→박민아)」 → 구방만에게 박민아 요청
+- 12:46 · 박수복(부사수 진행) → 품목별 SKU 카탈로그 HTML (Yku9ZG2eH3PsliWC0108RA)
+- 12:49 · 이민준 → 영업일·공휴일 달력 xlsx (wvjSeGJRPI1_F47BlDcEDw). fetchdoc _xlsx_text 누락 버그 수정 → 부분환불 별표 재수집
+- 12:50 · 구방만(부사수) → C31 업무 인계 대장·박민아 수첩 (Q4owkAQyT-xhxfMKTJ2wUw) OCR. 박민아 연락처는 구방만도 없음

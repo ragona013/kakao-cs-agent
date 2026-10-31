@@ -59,6 +59,7 @@
 - 미검증: claude-sonnet-5-5 실호출(키 교체 후)
 
 ## 작업 로그
+- 12:53 · Claude 앱 · 카톡 봇 왕복 성공(웹훅→4.3s→콜백 200), Railway main 자동배포 연결, 채팅 사용 OFF로 운영시간 말풍선 제거. 인터뷰 병렬(부사수: 박수복·구방만 / Claude: 민준·고길동·홍이장·홍보라·김청년). 신규 문서: 부분환불 산식, 에스컬레이션 절차서(→system_prompt 이관 규칙 보강), A07 홍보 게시물, SKU 카탈로그, 영업일 달력, C31 인계대장(6/24 옥돔 온도 상승), 농산 캘린더 xlsx 재수집(fetchdoc _xlsx_text 버그 수정). 회귀: L-32·R-05-a 첫 턴 3~4s 정상.
 - 12:15 · Claude 앱 · Anthropic API 한도 초과 발생 → 사용자 콘솔 한도 상향. 안전장치로 Anthropic 실패 시 OpenAI(gpt-4.1) 자동 전환 추가. 문서는 프롬프트에 목록만 넣고 read_doc 도구로 읽게 바꿔 속도 개선(턴당 2~10초). TC 9개 검증(TEST_LOG.md)
 - 12:06 · Claude 앱 · 배포 Railway 결정(상주 서버·HTTPS·MCP 배포). GitHub 저장소는 사용자 생성/푸시
 - 11:55 · Claude 앱 · 카톡 PC앱 자동 인터뷰 22분: 관계자 6명·문서 10건 확보. docs/ 자동 수집(fetchdoc/ocr 엔드포인트), interview/PLAYBOOK.md에 상황별 대처·소요 시간 기록

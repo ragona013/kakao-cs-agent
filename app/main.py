@@ -251,6 +251,24 @@ async def dev_get(path: str, tc: str, q: str = ""):
 
 
 # ---------------- 개발용: 관계자가 공유한 공식 문서(t1.kakaocdn.net) 저장 → docs/ ----------------
+def _xlsx_text(data: bytes) -> str:
+    import io
+    try:
+        import openpyxl
+    except ImportError:
+        import subprocess, sys
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "openpyxl"])
+        import openpyxl
+    wb = openpyxl.load_workbook(io.BytesIO(data), data_only=True)
+    out = []
+    for ws in wb:
+        out.append(f"## {ws.title}")
+        for r in ws.iter_rows(values_only=True):
+            if any(c is not None for c in r):
+                out.append(" | ".join("" if c is None else str(c) for c in r))
+    return "\n".join(out)
+
+
 @app.get("/api/dev/fetchdoc")
 async def dev_fetchdoc(url: str):
     import html as _html
