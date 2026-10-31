@@ -34,3 +34,4 @@
 - 규정·대응방안 개정 이력(ZIP B09 docx+구판 사진, 고길동) — https://t1.kakaocdn.net/aitop100/aitop100/dist/7pwiM8P_JmEfMSbzvIuwuQ.zip
 - 피싱·사칭 주의 안내(홍보라) — https://t1.kakaocdn.net/aitop100/aitop100/dist/5vvq6PshLE66YjnCVzkZzg.html
 - 농산 시즌 캘린더(ZIP: xlsx 거의 빈 파일 + 모니터 촬영 C23 5장 → OCR, 박수복) — https://t1.kakaocdn.net/aitop100/aitop100/dist/_uHi0aiIW__PSHbihlOOmQ.zip
+- 12:33 · 고길동 → 부분환불 산식·박스 비율 임계표 zip 확보, knowledge.md 반영
