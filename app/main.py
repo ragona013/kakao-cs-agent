@@ -150,6 +150,11 @@ async def webhook(req: Request):
         key = d.get("botUserKey") or d.get("botGroupKey") or "anon"
         s = get_session(f"bot:{key}")
         tc = find_tc_in_payload(payload, req.headers)
+        now = time.time()
+        idle = now - getattr(s, "_last_ts", now)
+        s._last_ts = now
+        if idle > float(os.getenv("SESSION_IDLE_RESET", "600")):  # 10분 이상 공백 → 새 상담으로 보고 대화 기록 초기화
+            s.history.clear(); s.trace.clear(); s.turns.clear(); s.meta.clear(); s.tc_id = None
         if tc and tc != s.tc_id:
             if s.tc_id:
                 s.history.clear(); s.trace.clear(); s.turns.clear(); s.meta.clear()
