@@ -45,3 +45,4 @@
 - 13:14 · 박민아 → 콜드체인 온도 로그 zip (tHHClVffN4f8jvA_vuOtuQ) — 주문 100400001 해동 후 재냉동 확정
 - 13:22 · 홍이장 → 갯마을 조업·입고 기록 xlsx (MatemuULfW2nG1dnufufsA). 단서: 「시원배송 결항·집하 기록」(구방만?), 「달력·날씨 이력」
 - 13:24 · 구방만 → 시원배송 결항·집하 기록 (hlI1ZFiRXl4sgzAw6HF52Q) / 이민준 → 산지 캘린더·기상 운영 기준+사실 일지 (DI_nOipTMUa7snyu_7PWrw)
+| 조억만 | https://pf.kakao.com/_xoflxaX | 14:17 이민준(추천 리워드→단골 조억만 언급) → 고길동(동의 확인) → 이민준 채널 전달 |
