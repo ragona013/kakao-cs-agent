@@ -1,0 +1,8 @@
+.env
+.env.bak
+logs/
+.venv/
+__pycache__/
+docs/raw/
+.DS_Store
+interview/_junk.md

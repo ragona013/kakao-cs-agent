@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>교동마을 CS 연습장</title>
+<style>
+:root{--bg:#f4f5f7;--panel:#fff;--line:#e3e5e8;--ink:#1d1f23;--sub:#6b7280;--kakao:#fee500;--chat:#b2c7da;--warn:#d93025;--ok:#188038;--code:#f6f8fa}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Apple SD Gothic Neo","Pretendard",sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+header h1{font-size:15px;margin:0}
+header .sp{flex:1}
+.pill{font-size:12px;padding:3px 8px;border-radius:99px;background:#eef0f3;color:var(--sub)}
+.pill.bad{background:#fde8e7;color:var(--warn)}
+button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+main{display:grid;grid-template-columns:240px minmax(360px,1fr) 440px;height:calc(100vh - 49px)}
+.col{overflow:auto;border-right:1px solid var(--line);background:var(--panel)}
+#tcs .item{padding:10px 14px;border-bottom:1px solid var(--line);cursor:pointer}
+#tcs .item:hover{background:#f8f9fa}
+#tcs .item.on{background:#fffbe0}
+#tcs .id{font-weight:700;font-size:13px}
+#tcs .t{color:var(--sub);font-size:12px;margin-top:2px}
+#free{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:6px}
+#free input{flex:1;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:6px}
+#chatcol{display:flex;flex-direction:column;background:var(--chat)}
+#metaBar{background:rgba(255,255,255,.75);padding:8px 14px;font-size:12px;color:#333;border-bottom:1px solid rgba(0,0,0,.06)}
+#msgs{flex:1;overflow:auto;padding:16px}
+.row{display:flex;margin:6px 0;align-items:flex-end;gap:6px}
+.row.me{justify-content:flex-end}
+.bub{max-width:72%;padding:9px 12px;border-radius:14px;white-space:pre-wrap;line-height:1.45;word-break:break-word}
+.me .bub{background:var(--kakao)}
+.bot .bub{background:#fff}
+.stat{font-size:11px;color:#3a4a5a}
+.stat.bad{color:var(--warn);font-weight:700}
+.sys{text-align:center;font-size:12px;color:#33475b;margin:10px 0}
+#composer{display:flex;gap:8px;padding:10px;background:#fff;border-top:1px solid var(--line)}
+#input{flex:1;resize:none;height:64px;padding:8px;border:1px solid var(--line);border-radius:8px;font:inherit}
+#right{display:flex;flex-direction:column}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{border:0;border-radius:0;flex:1;padding:10px;background:#fafafa;border-bottom:2px solid transparent}
+.tabs button.on{background:#fff;border-bottom-color:var(--ink);font-weight:700}
+.pane{flex:1;overflow:auto;padding:12px;display:none}
+.pane.on{display:block}
+#expected{white-space:pre-wrap;font-size:13px;line-height:1.55}
+.call{border:1px solid var(--line);border-radius:8px;margin-bottom:8px;overflow:hidden}
+.call .h{display:flex;gap:6px;align-items:center;padding:6px 8px;background:var(--code);font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.call .h b{color:#5b21b6}
+.call .st{margin-left:auto;font-weight:700}
+.call .st.ok{color:var(--ok)} .call .st.err{color:var(--warn)}
+.call pre{margin:0;padding:8px;font-size:11.5px;white-space:pre-wrap;word-break:break-all;max-height:220px;overflow:auto}
+.turnsep{font-size:11px;color:var(--sub);margin:12px 0 6px;border-top:1px dashed var(--line);padding-top:6px}
+#summary{font-size:12px;color:var(--sub);padding:8px 12px;border-top:1px solid var(--line);background:#fafafa}
+</style>
+</head>
+<body>
+<header>
+  <h1>교동마을 CS 에이전트 · 연습장</h1>
+  <span id="health" class="pill">서버 확인 중…</span>
+  <span class="sp"></span>
+  <button id="resetData" title="POST /api/action-data/reset">액션 데이터 초기화</button>
+</header>
+<main>
+  <div class="col">
+    <div id="free"><input id="freeTc" placeholder="TC ID 직접 입력"><button id="freeGo">시작</button></div>
+    <div id="tcs"></div>
+  </div>
+  <div class="col" id="chatcol">
+    <div id="metaBar">왼쪽에서 TC를 고르면 첫 메시지가 입력창에 채워져. 확인하고 전송하면 돼.</div>
+    <div id="msgs"></div>
+    <div id="composer">
+      <textarea id="input" placeholder="고객 역할로 메시지 입력 (Enter 전송, Shift+Enter 줄바꿈)"></textarea>
+      <button id="send" class="primary" disabled>전송</button>
+    </div>
+  </div>
+  <div class="col" id="right">
+    <div class="tabs">
+      <button data-p="pTrace" class="on">API 호출 로그</button>
+      <button data-p="pExp">기대 대응(모범)</button>
+    </div>
+    <div class="pane on" id="pTrace"><div id="trace"></div></div>
+    <div class="pane" id="pExp"><div id="expected">TC를 고르면 모범 처리 과정이 여기 보여.</div></div>
+    <div id="summary">말풍선 0 · 평균 0자 · 최대 응답 0ms</div>
+  </div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+let TCS=[],sid=null,stats=[];
+async function j(url,body){const r=await fetch(url,body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{});if(!r.ok)throw new Error(r.status+' '+await r.text());return r.json()}
+async function health(){try{const h=await j('/health');const el=$('#health');
+  const bad=!h.token_set||(!h.openai_set&&!h.mock);
+  el.textContent=`${h.mock?'MOCK':h.model} · 액션토큰 ${h.token_set?'O':'X'} · LLM키 ${h.openai_set?'O':'X'}`;
+  el.className='pill'+(bad?' bad':'');}catch(e){$('#health').textContent='서버 연결 실패';$('#health').className='pill bad'}}
+async function loadTcs(){TCS=await j('/api/tcs');$('#tcs').innerHTML=TCS.map((t,i)=>`<div class="item" data-i="${i}"><div class="id">${t.id}</div><div class="t">${esc(t.title)}</div></div>`).join('');
+  document.querySelectorAll('#tcs .item').forEach(el=>el.onclick=()=>start(TCS[+el.dataset.i],el))}
+function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+async function start(tc,el){
+  document.querySelectorAll('#tcs .item').forEach(x=>x.classList.remove('on'));if(el)el.classList.add('on');
+  const r=await j('/api/session/new',{tc_id:tc.id,meta:tc.meta||{}});sid=r.session_id;stats=[];
+  $('#msgs').innerHTML='';$('#trace').innerHTML='';
+  const m=tc.meta||{};
+  $('#metaBar').innerHTML=`<b>${esc(tc.id)}</b> · ${esc(m['상담 인입 일시']||'')} · ${esc(m['인입 계정']||'')} <span style="color:#666">(세션 ${sid})</span>`;
+  $('#expected').textContent=tc.expected||'(공개 TC 아님)';
+  $('#input').value=tc.first_message||'';$('#send').disabled=false;$('#input').focus();
+  sys(`새 상담 시작 — ${tc.id}`);summary();
+}
+function sys(t){$('#msgs').insertAdjacentHTML('beforeend',`<div class="sys">${esc(t)}</div>`)}
+function bubble(who,text,stat,bad){
+  const st=stat?`<span class="stat${bad?' bad':''}">${stat}</span>`:'';
+  $('#msgs').insertAdjacentHTML('beforeend',`<div class="row ${who}">${who==='me'?st:''}<div class="bub">${esc(text)}</div>${who==='bot'?st:''}</div>`);
+  $('#msgs').scrollTop=1e9}
+function renderTrace(calls,turn){
+  if(!calls.length){$('#trace').insertAdjacentHTML('beforeend',`<div class="turnsep">턴 ${turn} · API 호출 없음</div>`);return}
+  $('#trace').insertAdjacentHTML('beforeend',`<div class="turnsep">턴 ${turn} · 호출 ${calls.length}건</div>`+calls.map(c=>{
+    const ok=typeof c.status==='number'&&c.status<300;
+    const q=c.query?'?'+new URLSearchParams(c.query):'';
+    return `<div class="call"><div class="h"><b>${c.api||'?'}</b>${c.method} ${esc(c.path+q)}<span class="st ${ok?'ok':'err'}">${c.status} · ${c.ms}ms</span></div>`+
+      (c.body?`<pre>body: ${esc(JSON.stringify(c.body,null,1))}</pre>`:'')+`<pre>${esc(c.result||'')}</pre></div>`}).join(''));
+  $('#pTrace').scrollTop=1e9}
+function summary(){const n=stats.length;const avg=n?Math.round(stats.reduce((a,b)=>a+b.chars,0)/n):0;const mx=n?Math.max(...stats.map(s=>s.ms)):0;
+  $('#summary').textContent=`말풍선 ${n}/10 · 평균 ${avg}자 · 최대 응답 ${mx}ms`+(n>=10?' · ⚠ 10건 도달':'')}
+async function send(){
+  const t=$('#input').value.trim();if(!t||!sid)return;$('#input').value='';bubble('me',t);
+  $('#send').disabled=true;const tmp=document.createElement('div');tmp.className='sys';tmp.textContent='응답 생성 중…';$('#msgs').appendChild(tmp);
+  try{const r=await j('/api/chat',{session_id:sid,message:t});tmp.remove();
+    stats.push({chars:r.chars,ms:r.ms});
+    const bad=r.chars>500||r.ms>60000;
+    bubble('bot',r.reply,`${r.chars}자 · ${(r.ms/1000).toFixed(1)}s`,bad);
+    renderTrace(r.trace||[],stats.length);summary();
+  }catch(e){tmp.textContent='오류: '+e.message}
+  $('#send').disabled=false;$('#input').focus()}
+$('#send').onclick=send;
+$('#input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();send()}});
+$('#freeGo').onclick=()=>{const id=$('#freeTc').value.trim();if(id)start({id,title:'직접 입력',meta:{},first_message:'',expected:''})};
+$('#resetData').onclick=async()=>{if(!confirm('액션 데이터를 처음 상태로 초기화할까?'))return;try{const r=await j('/api/action-reset',{});sys('액션 데이터 초기화: '+r.status)}catch(e){sys('초기화 실패: '+e.message)}};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id===b.dataset.p))});
+health();loadTcs();
+</script>
+</body>
+</html>
